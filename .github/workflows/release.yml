@@ -48,28 +48,37 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download all artifacts
+      - name: Download Linux artifact
         uses: actions/download-artifact@v4
         with:
-          path: artifacts/
-          merge-multiple: true
+          name: simplenesting-ubuntu-latest
+          path: artifacts/simplenesting-ubuntu-latest
+
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: simplenesting-windows-latest
+          path: artifacts/simplenesting-windows-latest
 
       - name: Create release archives
         run: |
           mkdir -p dist
-          for dir in artifacts/simplenesting-*/; do
-            platform=$(basename "$dir" | sed 's/simplenesting-//')
-            if [ "$platform" = "ubuntu-latest" ]; then platform="linux"; fi
-            if [ "$platform" = "windows-latest" ]; then platform="windows"; fi
-            echo "Packaging $platform..."
-            cd "$dir"
-            if [ "$platform" = "windows" ]; then
-              zip -r /home/runner/work/dist/simplenesting-windows.zip ./*
-            else
-              tar czf /home/runner/work/dist/simplenesting-${platform}.tar.gz ./*
-            fi
+          
+          # Linux
+          if [ -d "artifacts/simplenesting-ubuntu-latest" ]; then
+            echo "Packaging linux..."
+            cd artifacts/simplenesting-ubuntu-latest
+            tar czf /home/runner/work/dist/simplenesting-linux.tar.gz ./*
             cd /home/runner/work/dist
-          done
+          fi
+          
+          # Windows
+          if [ -d "artifacts/simplenesting-windows-latest" ]; then
+            echo "Packaging windows..."
+            cd artifacts/simplenesting-windows-latest
+            zip -r /home/runner/work/dist/simplenesting-windows.zip ./*
+            cd /home/runner/work/dist
+          fi
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
