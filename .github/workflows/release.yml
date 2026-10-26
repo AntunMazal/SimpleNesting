@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
@@ -61,7 +61,6 @@ jobs:
             platform=$(basename "$dir" | sed 's/simplenesting-//')
             if [ "$platform" = "ubuntu-latest" ]; then platform="linux"; fi
             if [ "$platform" = "windows-latest" ]; then platform="windows"; fi
-            if [ "$platform" = "macos-latest" ]; then platform="macos"; fi
             echo "Packaging $platform..."
             cd "$dir"
             if [ "$platform" = "windows" ]; then
