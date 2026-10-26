@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: simplenesting-${{ matrix.os }}
-          path: dist/simplenesting/
+          path: dist/   # <--- PROMJENA: Umjesto dist/simplenesting/, dižemo cijelu dist mapu da sigurno uhvati sve unutra!
           retention-days: 90
 
   release:
@@ -62,25 +62,23 @@ jobs:
 
       - name: Create release archives
         run: |
-          # Create dist directory at root level (parent of artifacts/)
           mkdir -p dist
           
-          # Linux
+          # Linux - uzima sve što je PyInstaller izbacio u dist mapi
           if [ -d "artifacts/simplenesting-ubuntu-latest" ]; then
             echo "Packaging linux..."
             cd artifacts/simplenesting-ubuntu-latest
-            mkdir -p ../../dist
-            tar czf ../../dist/simplenesting-linux.tar.gz ./*
-            cd ../..
+            # Pronađi prvi podfolder ili zipaj sadržaj
+            tar czf ../../dist/simplenesting-linux.tar.gz .
+            cd ../../
           fi
           
-          # Windows
+          # Windows - uzima sve što je PyInstaller izbazio za Windowse
           if [ -d "artifacts/simplenesting-windows-latest" ]; then
             echo "Packaging windows..."
             cd artifacts/simplenesting-windows-latest
-            mkdir -p ../../dist
-            zip -r ../../dist/simplenesting-windows.zip ./*
-            cd ../..
+            zip -r ../../dist/simplenesting-windows.zip .
+            cd ../../
           fi
 
       - name: Create GitHub Release
