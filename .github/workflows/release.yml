@@ -68,16 +68,16 @@ jobs:
           if [ -d "artifacts/simplenesting-ubuntu-latest" ]; then
             echo "Packaging linux..."
             cd artifacts/simplenesting-ubuntu-latest
-            tar czf /home/runner/work/dist/simplenesting-linux.tar.gz ./*
-            cd /home/runner/work/dist
+            tar czf ../../dist/simplenesting-linux.tar.gz ./*
+            cd ../..
           fi
           
           # Windows
           if [ -d "artifacts/simplenesting-windows-latest" ]; then
             echo "Packaging windows..."
             cd artifacts/simplenesting-windows-latest
-            zip -r /home/runner/work/dist/simplenesting-windows.zip ./*
-            cd /home/runner/work/dist
+            zip -r ../../dist/simplenesting-windows.zip ./*
+            cd ../..
           fi
 
       - name: Create GitHub Release
