@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "simple-nesting"
+version = "1.0.0"
+description = "Desktop nesting tool for laser / plasma cutting: DXF parts in, nested sheets (DXF + report) out"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "LGPL-3.0-or-later" }
+authors = [{ name = "SimpleNesting" }]
+keywords = ["nesting", "dxf", "laser", "plasma", "sheet", "cad", "pyside6"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: Manufacturing",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "PySide6>=6.6",
+    "ezdxf>=1.3",
+    "pyclipper>=1.3",
+    "shapely>=2.0",
+    "python-libnest2d>=0.1.3",
+    "spyrrow>=0.9",
+]
+
+[project.urls]
+Homepage = "https://github.com/t-vojtech/SimpleNesting"
+Issues = "https://github.com/t-vojtech/SimpleNesting/issues"
+
+[project.gui-scripts]
+simplenesting = "SimpleNesting.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["SimpleNesting*"]
+
+[tool.setuptools.package-data]
+SimpleNesting = ["*.svg", "*.png", "*.ico"]

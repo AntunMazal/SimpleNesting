@@ -1,0 +1,7 @@
+This package is licensed under the GNU Lesser General Public License v3.0 or later
+(LGPL-3.0-or-later). As required by Section 0 of the LGPL, a copy of the GNU
+General Public License version 3 is available at:
+
+    https://www.gnu.org/licenses/gpl-3.0.txt
+
+The full LGPL-3.0 license text is in the LICENSE file in this distribution.
