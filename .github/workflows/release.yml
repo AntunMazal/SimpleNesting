@@ -80,6 +80,11 @@ jobs:
             cd ../..
           fi
 
+      - name: Copy archives to repo root for release action
+        run: |
+          ls -la dist/
+          cp dist/* ${{ github.workspace }}/dist/ 2>/dev/null || true
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
