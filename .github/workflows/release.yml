@@ -62,22 +62,25 @@ jobs:
 
       - name: Create release archives
         run: |
+          # Create dist directory at root level (parent of artifacts/)
           mkdir -p dist
           
           # Linux
           if [ -d "artifacts/simplenesting-ubuntu-latest" ]; then
             echo "Packaging linux..."
             cd artifacts/simplenesting-ubuntu-latest
-            tar czf ../dist/simplenesting-linux.tar.gz ./*
-            cd ..
+            mkdir -p ../../dist
+            tar czf ../../dist/simplenesting-linux.tar.gz ./*
+            cd ../..
           fi
           
           # Windows
           if [ -d "artifacts/simplenesting-windows-latest" ]; then
             echo "Packaging windows..."
             cd artifacts/simplenesting-windows-latest
-            zip -r ../dist/simplenesting-windows.zip ./*
-            cd ..
+            mkdir -p ../../dist
+            zip -r ../../dist/simplenesting-windows.zip ./*
+            cd ../..
           fi
 
       - name: Create GitHub Release
