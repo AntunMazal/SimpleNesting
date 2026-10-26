@@ -6,8 +6,8 @@
 **every parameter is open** — quantities, start angle, rotation step, margin, spacing, sheet format, engine, time limit — nothing is hidden.
 
 - Load DXF parts → pick an algorithm → hit *Run Nesting* → get the sheet layouts + a CSV report
-- **3 nesting algorithms** (Box, libnest2d, spyrrow) — try them all fast and compare the yield %
-- **Compare algorithms side-by-side**: Box, libnest2d, spyrrow — same parts, same sheet, instant yield comparison
+- **3 nesting algorithms** (Box, No-Fit Polygon libnest2d, sparrow) — try them all fast and compare the yield %
+- **Compare algorithms side-by-side**: Box, No-Fit Polygon libnest2d, sparrow — same parts, same sheet, instant yield comparison
 - **Fast GUI engine** for experimentation: tweak the sheet size, margins, spacing, rotations — instant feedback
 - **Everything adjustable for the detail-oriented**: quantities, start angle, rotation step, margin, spacing, sheet format, time limit, engine
 - **Manual editing (Edit tab)**: after the algorithm, the human adds the final touch — drag, rotate and snap parts to improve on the automatic result
