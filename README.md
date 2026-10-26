@@ -41,7 +41,7 @@ python main.py
 
 ### Ready-to-run program (no Python needed)
 
-The **Releases** page has a ready-to-run program for Windows, Linux and macOS. Unpack the archive and start the program inside the
+The **Releases** page has a ready-to-run program for Windows and Linux. Unpack the archive and start the program inside the
 folder: `simplenesting` (Windows: `simplenesting.exe`). The whole folder belongs together - it is not a single file, because PySide6 and
 libnest2d are LGPL and must stay replaceable.
 
