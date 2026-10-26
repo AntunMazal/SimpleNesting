@@ -12,7 +12,7 @@
 - **Everything adjustable for the detail-oriented**: quantities, start angle, rotation step, margin, spacing, sheet format, time limit, engine
 - **Manual editing (Edit tab)**: after the algorithm, the human adds the final touch — drag, rotate and snap parts to improve on the automatic result
 
-**GUI**: PySide6 (Qt 6). Desktop app for laser / plasma cutting.
+**GUI**: PySide6 (Qt 6). A robust desktop application for 2D nesting and optimization tailored for sheet and coil cutting machines — including laser, plasma, waterjet, punching, and roll-fed systems.
 
 ## Screenshots
 
