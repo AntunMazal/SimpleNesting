@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SimpleNesting - Repozitorij</title>
-    <!-- GitHub Primer CSS za autentičan izgled -->
-    <link href="https://cloudflare.com" rel="stylesheet">
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Primer/21.3.6/primer.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
         .gh-header { background-color: #161b22; padding: 16px; border-bottom: 1px solid #30363d; }
@@ -26,45 +25,46 @@
 </head>
 <body>
 
-    <!-- Navigacija -->
     <div class="gh-header">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 10px;">
                 <i class="fab fa-github" style="font-size: 32px; color: #f0f6fc;"></i>
-                <strong style="color: #f0f6fc; font-size: 16px;">AntunMazal / <a href="#">SimpleNesting</a></strong>
+                <strong style="color: #f0f6fc; font-size: 16px;">AntunMazal / <a href="https://github.com/AntunMazal/SimpleNesting" target="_blank">SimpleNesting</a></strong>
                 <span class="Label Label--secondary" style="color: #8b949e; border-color: #30363d;">Public</span>
             </div>
-            <a href="https://github.com" target="_blank" class="btn-custom"><i class="fas fa-code"></i> Otvori na GitHubu</a>
+            <a href="https://github.com/AntunMazal/SimpleNesting" target="_blank" class="btn-custom"><i class="fas fa-code"></i> Otvori na GitHubu</a>
         </div>
     </div>
 
     <div class="container">
         <h2 style="color: #f0f6fc; margin-bottom: 20px;"><i class="fas fa-folder-open"></i> Pregled datoteka projekta</h2>
-        
-        <!-- Popis datoteka koji se automatski puni -->
+
         <div class="file-box" id="file-list">
             <div class="file-item" style="color: #8b949e;">Učitavam datoteke s GitHuba...</div>
         </div>
     </div>
 
     <script>
-        // Službeni GitHub API link za vaš repozitorij
-        const repoUrl = "https://github.com";
+        const repoUrl = "https://api.github.com/repos/AntunMazal/SimpleNesting/contents/";
 
         async function fetchFiles() {
+            const listElement = document.getElementById("file-list");
             try {
                 const response = await fetch(repoUrl);
+                if (!response.ok) {
+                    throw new Error("HTTP " + response.status);
+                }
                 const files = await response.json();
-                const listElement = document.getElementById("file-list");
-                listElement.innerHTML = ""; // Briše poruku učitavanja
+                listElement.innerHTML = "";
 
-                // Sortiranje: mape prve, onda datoteke
+                // Mape prve, zatim datoteke
                 files.sort((a, b) => (b.type === 'dir') - (a.type === 'dir'));
 
                 files.forEach(file => {
                     const isFolder = file.type === "dir";
                     const iconClass = isFolder ? "fas fa-folder folder-icon" : "far fa-file-alt";
-                    
+                    const sizeText = isFolder ? "" : (file.size / 1024).toFixed(1) + " KB";
+
                     const item = document.createElement("div");
                     item.className = "file-item";
                     item.innerHTML = `
@@ -72,12 +72,13 @@
                             <i class="${iconClass} file-icon"></i>
                             <a href="${file.html_url}" target="_blank" style="${isFolder ? 'font-weight: 600;' : ''}">${file.name}</a>
                         </div>
-                        <span style="color: #8b949e; font-size: 12px;">${(file.size / 1024).toFixed(1)} KB</span>
+                        <span style="color: #8b949e; font-size: 12px;">${sizeText}</span>
                     `;
                     listElement.appendChild(item);
                 });
             } catch (error) {
-                document.getElementById("file-list").innerHTML = `<div class="file-item" style="color: #f85149;">Greška pri učitavanju datoteka.</div>`;
+                console.error(error);
+                listElement.innerHTML = `<div class="file-item" style="color: #f85149;">Greška pri učitavanju datoteka (${error.message}).</div>`;
             }
         }
 
